@@ -10,9 +10,12 @@
     BlinkMacSystemFont;
 }
 
-html {
+html, body {
   background: none !important;
   background-color: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
 }
 
 .app-nodrag {
@@ -25,4 +28,36 @@ html {
 
 * {
   user-select: none;
+}
+
+/* 确保根元素完全透明和圆角 */
+#root {
+  background: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+}
+
+/* 修复可能的白边问题 */
+.floating-bg {
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Windows 特定修复 - 强制移除所有可能的边框和阴影 */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  body, html, #root, .app-drag, .floating-bg {
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+
+/* 强制透明背景，防止任何白边 */
+body::before,
+body::after,
+html::before,
+html::after {
+  display: none !important;
 }

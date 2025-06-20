@@ -51,10 +51,12 @@ async function createFloatingWindow(): Promise<void> {
     maximizable: false,
     fullscreenable: false,
     closable: false,
+    roundedCorners: false, // 禁用系统圆角，使用自定义圆角
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       spellcheck: false,
-      sandbox: false
+      sandbox: false,
+      backgroundThrottling: false // 防止后台节流影响动画
     }
   })
   floatingWindowState.manage(floatingWindow)
